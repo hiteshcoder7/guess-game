@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Langar&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Langar&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header{
+            width: 100%;
+           line-height: 15vh;
+            background-color: #20bf6b;
+        }
+.guess{
+    text-align: center;
+    color: white;
+    font-size: 1.8rem;
+    letter-spacing: 15px;
+    text-shadow:0 1px  0 #efefef,
+    0 2px  0 #efefef,
+    0 3px  0 #efefef,
+    0 4px  0 #efefef,
+    0 30px  5px  rgba(0,0,0,.1);
+    font-family: 'Langar', cursive;
+
+}
+section{
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7bed9f;
+
+
+}
+.gameArea{
+    width: 50%;
+    height: 400px;
+    padding: 20px 0;
+    background-color: #2ed573;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 6px -6px black;
+    font-family: 'Langar', cursive;
+ 
+}
+h3{
+    text-align: center;
+    font-size: 1.5rem;
+}
+input{
+    width: 40%;
+    padding: 15px 0;
+    text-align: center;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    background-color: #dff9fb;
+    color: black;
+    margin: 2rem 0;
+    font-size: 1.1rem;
+}
+button{
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+    border: #2f3542;
+    text-decoration: none;
+    margin-top: 10px;
+    color: #eb4d4b;
+
+}
+button.btn{
+    font-weight: 600;
+    padding: 1rem 2rem;
+    background-color: white;
+    text-transform: uppercase;
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.65,-0.25,0.25,1.95);
+
+}
+button.btn:hover,button.btn:focus,button.btn:active{
+    letter-spacing: 0.125rem;
+    word-spacing: 0.2rem;
+}
+.hidden{
+    display: none;
+}
+#gooodmaorning{
+text-align: center;
+font-style: oblique;
+text-transform: uppercase;
+}
+    </style>
+</head>
+<body>
+    <h1 id="gooodmaorning"></h1>
+<header> <h1 class="guess">Guess The  Word Game 😋😛 </h1>   </header>
+<section>
+
+    <div class="gameArea">
+        <h3 class="msg"></h3>
+<input type="text" class="hidden">
+<button class="btn">Click Here To Start</button>
+</div>
+</section>
+<script>
+    const  go = document.querySelector('#gooodmaorning');
+const  msg = document.querySelector('.msg');
+const guess = document.querySelector('input');
+const btn  = document.querySelector('.btn');
+let play = false;
+let  newWords = "";
+let randWords = "";
+let sWords = ['html','css','javascript','java','bootstrap','scss','angular','php','python','c++','ruby','pascal','sql','swift','c#'];
+const  creteNewWords = () => {
+let ranNum =Math.floor(Math.random() * sWords.length);
+let newTempSwords = sWords[ranNum];
+return newTempSwords;
+}
+const scrambleWords = (arr) =>{
+for (let i = arr.length-1;i>0;i--){
+let temp = arr[i];
+let j =Math.floor(Math.random()*(i+1));
+arr[i] = arr[j];
+arr[j]=temp;
+
+}
+return arr;
+}
+btn.addEventListener('click',function(){
+if (!play) {
+   play = true;
+   btn.innerHTML ="Guess";
+   guess.classList.toggle('hidden');
+
+  newWords= creteNewWords();
+ randWords=scrambleWords(newWords.split("")).join("");
+ msg.innerHTML = `Guess the word : ${randWords} `;
+}else{
+   let tempWord = guess.value;
+   if(tempWord=== newWords){
+play=false;
+msg.innerHTML  = `Awesome It's correct .it is   ${newWords}.Good `+a ;
+btn.innerHTML = "start with another one";
+guess.classList.toggle('hidden');
+guess.value= "";
+   }else{
+    msg.innerHTML  = `its incorrect.it is   ${newWords}. write ${newWords} the ans to begin with next one. Very bad `+a ;
+
+
+   }
+}
+
+})
+const a = prompt('enter your name');
+go.innerHTML= 'start  with quiz '+a;
+
+</script>
+</body>
+</html>
